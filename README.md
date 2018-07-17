@@ -1,0 +1,2 @@
+# Paster
+Clipboard Manager
