@@ -5,13 +5,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion androidVersions.compileSdkVersion
+    compileSdkVersion compile_sdk_version
     defaultConfig {
         applicationId "com.alanyuan.clipboard"
-        minSdkVersion androidVersions.minSdkVersion
-        targetSdkVersion androidVersions.targetSdkVersion
-        versionCode appVersionCode
-        versionName appVersionName
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode app_version_code
+        versionName app_version_name
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

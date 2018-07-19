@@ -18,8 +18,8 @@ import android.widget.Toast
 class ClipboardService : Service() {
     val notificationID: Int = 9073
 
-    override fun onBind(intent: Intent?): IBinder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -51,7 +51,7 @@ class ClipboardService : Service() {
                 .setContentIntent(pendingIntent)
                 .build()
 
-        startForeground(notificationID,notification)
+        startForeground(notificationID, notification)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
