@@ -1,14 +1,19 @@
 package com.alanyuan.clipboard
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.chad.library.adapter.base.BaseQuickAdapter
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.toast
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +27,14 @@ class MainActivity : AppCompatActivity() {
         clipboardAdapter.bindToRecyclerView(rv_paster)
         startService()
         initData()
+
+        clipboardAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+            val clipText = clipboardAdapter.data.get(position).clipText
+            val clipData = ClipData.newPlainText("text", clipText)
+            val clipboard = this.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            clipboard.primaryClip = clipData
+            toast("已复制:$clipText")
+        }
     }
 
     private fun initData() {
