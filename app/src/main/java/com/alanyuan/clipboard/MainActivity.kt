@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         startService()
         initData()
 
-        clipboardAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+        clipboardAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { _, _, position ->
             val clipText = clipboardAdapter.data.get(position).clipText
             val clipData = ClipData.newPlainText("text", clipText)
             val clipboard = this.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -41,15 +41,15 @@ class MainActivity : AppCompatActivity() {
         val mRealm = Realm.getInstance(RealmHelper.RealmConfig)
         try {
             val mRealmResults = mRealm.where<ClipboardData>().findAllAsync()
-            mRealmResults.addChangeListener { results: RealmResults<ClipboardData>? ->
-                val clipboradDataList: List<ClipboardData> = mRealm.copyFromRealm(results)
-                clipboardAdapter.setNewData(clipboradDataList)
+            mRealmResults.addChangeListener { results: RealmResults<ClipboardData> ->
+                val clipboardDataList: List<ClipboardData> = mRealm.copyFromRealm(results)
+                clipboardAdapter.setNewData(clipboardDataList)
             }
         } catch (e: Exception) {
         }
     }
 
-    fun startService() {
+    private fun startService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(Intent(this, ClipboardService::class.java))
         } else {

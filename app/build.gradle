@@ -8,10 +8,10 @@ android {
     compileSdkVersion compile_sdk_version
     defaultConfig {
         applicationId "com.alanyuan.clipboard"
-        minSdkVersion min_sdk_version
-        targetSdkVersion target_sdk_version
-        versionCode app_version_code
-        versionName app_version_name
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "0.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -20,9 +20,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-//    dataBinding {
-//        enabled = true
-//    }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -39,7 +39,6 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.alibaba:fastjson:1.2.47'
     implementation 'com.github.chenBingX:SuperTextView:v2.0.1'
-    implementation 'com.zhy:flowlayout-lib:1.0.3'
     implementation "io.reactivex.rxjava2:rxjava:2.1.16"
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     testImplementation 'junit:junit:4.12'

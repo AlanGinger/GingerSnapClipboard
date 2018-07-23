@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_marginTop="10dp"
-    android:layout_height="50dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="clip"
+            type="com.alanyuan.clipboard.ClipboardData"/>
+    </data>
 
-    <TextView
-        android:id="@+id/tv_clip"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@android:color/white"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:elevation="4dp"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="16dp" />
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp">
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_clip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@android:color/white"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:text="@{clip.clipText}"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="16dp"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
