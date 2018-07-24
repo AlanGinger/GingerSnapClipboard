@@ -1,29 +1,35 @@
 package com.alanyuan.clipboard
 
+import android.content.Context
 import android.databinding.DataBindingUtil
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.alanyuan.clipboard.databinding.ItemClipboardBinding
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
 
-class ClipboardAdapter : BaseQuickAdapter<ClipboardData, ClipboardAdapter.ClipboardViewHolder>(R.layout.item_clipboard) {
+class ClipboardAdapter : RecyclerView.Adapter<ClipboardAdapter.ClipboardViewHolder>() {
+    private lateinit var mContext: Context
+    var mClipboardDataList: List<ClipboardData>? = null
 
-    override fun createBaseViewHolder(view: View?): ClipboardViewHolder {
-        return super.createBaseViewHolder(view)
+    fun setData(dataList: List<ClipboardData>?) {
+        this.mClipboardDataList = dataList
+        notifyDataSetChanged()
     }
 
-    override fun createBaseViewHolder(parent: ViewGroup, layoutResId: Int): ClipboardViewHolder {
-        val binding: ItemClipboardBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context),
-                R.layout.item_clipboard, parent, false)
-        ClipboardViewHolder(binding).binding.clip
-        return createBaseViewHolder(parent, layoutResId)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipboardViewHolder {
+        mContext = parent.context
+        val binding: ItemClipboardBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.item_clipboard, parent, false)
+        return ClipboardViewHolder(binding)
     }
 
-    override fun convert(helper: ClipboardViewHolder, item: ClipboardData) {
-        helper.setText(R.id.tv_clip, item.clipText)
+    override fun getItemCount(): Int {
+        return mClipboardDataList?.size ?: 0
     }
 
-    class ClipboardViewHolder(val binding: ItemClipboardBinding) : BaseViewHolder(binding.root)
+    override fun onBindViewHolder(holder: ClipboardViewHolder, position: Int) {
+        holder.binding.clipData = mClipboardDataList?.get(position)
+        holder.binding.executePendingBindings()
+    }
+
+    class ClipboardViewHolder(val binding: ItemClipboardBinding) : RecyclerView.ViewHolder(binding.root)
 }

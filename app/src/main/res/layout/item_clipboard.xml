@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="clip"
+            name="clipData"
             type="com.alanyuan.clipboard.ClipboardData"/>
     </data>
 
@@ -20,7 +20,7 @@
             android:background="@android:color/white"
             android:elevation="4dp"
             android:gravity="center"
-            android:text="@{clip.clipText}"
+            android:text="@{clipData.clipText}"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="16dp"/>
 
